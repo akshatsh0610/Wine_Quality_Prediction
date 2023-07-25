@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wine Quality Prediction-ML Projects</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+        <!-- Bootstrap Font Icon CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+</head>
+
+<body>
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand"><b>Wine Quality Prediction</b></a>
+
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-2">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Docs</a>
+                </li>
+            </ul>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="headings my-4">
+        <a class="brand" id="brand" href="#">
+            <img class="img-responsive" style="height:auto"src="static/wine_logo.png" alt="" width="150" height="150">
+        </a>
+        <br>
+        <h1 class="text-center my-2"><b>Red Wine Quality Prediction</b></h1>
+    </div>
+    <style>
+        #brand img {
+            margin-left: 440pt;
+        }
+
+        form input {
+            margin-bottom: 3px;
+        }
+    </style>
+
+    <div class="container my-5">
+        <form action="{{ url_for('predict') }}" method="POST" class="row">
+            <div class="form-outline col-6 my-2">
+                <label for="inputnumber" class="form-label"><b>Fixed Acidity(4.00 - 16.00)</b></label>
+                <input type="number" step="0.01" class="form-control" placeholder="eg. 5.5" name="fixed_acidity" id="inputnumber1">
+            </div>
+            <div class="form-outline col-6 my-2">
+                <label for="inputnumber" class="form-label"><b>Volatile Acidity(0.10 - 1.60)</b></label>
+                <input type="number" step="0.01" class="form-control" placeholder="eg. 0.5 "name="volatile_acidity" id="inputnumber2" required="required">
+            </div>
+            <br>
+            <div class="form-outline col-6 my-2">
+                <label for="inputnumber" class="form-label"><b>Citric Acid(0.00 - 1.00)</b></label>
+                <input type="number" step="0.01" class="form-control" placeholder="eg. 0.05"name="citric_acid" id="inputnumber3" required="required">
+            </div>
+
+            <div class="form-outline col-6 my-2">
+                <label for="inputnumber" class="form-label"><b>Residual Sugar(0.90 - 15.50)</b></label>
+                <input type="number" step="0.01" class="form-control" placeholder="eg. 2.5" name="residual_sugar" id="inputnumber4" required="required">
+            </div>
+            <div class="form-outline col-6 my-2">
+                <label for="inputnumber" class="form-label"><b>Chlorides(0.01 - 0.70)</b></label>
+                <input type="number" step="0.01" class="form-control" placeholder="eg. 0.08"name="chlorides" id="inputnumber4" required="required">
+            </div>
+            <div class="form-outline col-6 my-2">
+                <label for="inputnumber" class="form-label"><b>Free Sulphur-dioxide(1.00 - 75.00)</b></label>
+                <input type="number" step="0.01" class="form-control" placeholder="eg. 10" name="free_sulphur_dioxide" id="inputnumber4" required="required">
+            </div>
+            <div class="form-outline col-6 my-2">
+                <label for="inputnumber" class="form-label"><b>Total Sulphur-dioxide(6.00 - 289.00)</b></label>
+                <input type="number" step="0.01" class="form-control" placeholder="eg. 35"name="total_sulphur_dioxide" id="inputnumber4" required="required">
+            </div>
+            <div class="form-outline col-6 my-2">
+                <label for="inputnumber" class="form-label"><b>Density(0.90000 - 1.10000)</b></label>
+                <input type="number" step="0.01" class="form-control" placeholder="eg. 0.99" name="density" id="inputnumber4" required="required">
+            </div>
+            <div class="form-outline col-6 my-2">
+                <label for="inputnumber" class="form-label"><b>pH(Part of Hydrogen)(2.70 - 4.20)</b></label>
+                <input type="number" step="0.01" class="form-control" placeholder="eg. 3.15" name="ph" id="inputnumber4" required="required">
+            </div>
+            <div class="form-outline col-6 my-2">
+                <label for="inputnumber" class="form-label"><b>Sulphates(0.30 - 2.00)</b></label>
+                <input type="number" step="0.01" class="form-control" placeholder="eg. 0.5"name="sulphates" id="inputnumber4" required="required">
+            </div>
+            <div class="form-outline  my-2">
+                <label for="inputnumber" class="form-label"><b>Alcohol(8.00 - 15.00)</b></label>
+                <input type="number" step="0.01" class="form-control" placeholder="eg. 9"name="alcohol" id="inputnumber4" required="required">
+            </div>
+            <br>
+
+
+            <br>
+            <div class="col-12 my-2">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="gridCheck">
+                    <label class="form-check-label" for="gridCheck" required="required">
+                        Check me out
+                    </label>
+                </div>
+            </div>
+            <br>
+            <div class="d-grid my-3">
+                <button class="btn btn-success" value="Predict" type="submit">Predict the Wine Quality</button>
+            </div>
+        </form>
+
+		<!-- Result -->
+		<div class="results">
+			{% if prediction==1 %}
+				<span class='text-center'><h1>The Predicted Quality of wine is GOOD(More than 60%)!</h1></span>
+				
+			{% elif prediction==0 %}
+				<span class='text-center'><h1>The Predicted Quality of Wine is BAD(less than 60%)!</h1></span>
+			{% endif %}
+		</div>
+
+            <div class="content my-5">
+                <h2 class="text-center"><b>Thank You!</b></h2>
+                <p class="text-center">This Machine Learning Projects are developed and run under the Atobtech Group. All the
+                    information are Verified and Correct.All the General rules and Guidlines are follows at the time of making website. You can visit my all social
+                    media accounts for verify the information and more understanding. </p>
+                <div class="text-center" >
+                    <a class="mx-1" href="https://www.facebook.com/akshaykumar.hiran.1" ><i class="bi bi-facebook" style="font-size: 30px;"></i></a>
+                    <a class="mx-1" href="https://www.instagram.com/akshaykumar_3294/"><i class="bi bi-instagram" style="font-size: 30px;" ></i></a>
+                    <a class="mx-1" href="https://www.linkedin.com/in/akshay-kumar-hiran-61407a209/"><i
+                            class="bi bi-linkedin" style="font-size: 30px;"></i></a>
+                    <a class="mx-1" href="https://twitter.com/akshay_3294"><i class="bi bi-twitter" style="font-size: 30px;"></i></a>
+                    <a class="mx-1" href="https://www.github.com/Ak3294"><i class="bi bi-github" style="font-size: 30px;"></i></a>
+                </div>
+                <div class="text-center">
+                    <p>copyright2023 &copy; <a href="https://atobtech.blogspot.com">atobtech.blogspot.com</a>
+                    </p>
+                </div>
+            </div>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
